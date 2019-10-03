@@ -11,7 +11,13 @@ JOIN sys.pdw_table_distribution_properties p
 ON p.object_id = t.object_id 
 WHERE p.[distribution_policy_desc] = 'REPLICATE'
 	AND t.[name] = 'DimProducts'
+OPTION (LABEL = 'ADWDemoReplicated')
 GO
+
+--Label for reference
+SELECT  *
+FROM    sys.dm_pdw_exec_requests
+WHERE   [label] = 'ADWDemoReplicated';
 
 /*****************************************************************************************
 2. WHAT IF I RUN A QUERY AGAINST A REPL TABLE ?
